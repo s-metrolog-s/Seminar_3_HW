@@ -5,15 +5,13 @@
 Console.Clear();
 Random rand = new Random();
 int N = rand.Next(1, 10);
-int count = 1;
-double cube = 1;
+Console.WriteLine();
 
 Console.WriteLine($"Таблица кубов чисел от 1 до {N}");
-Console.WriteLine("--------");
-while (count <= N)
+Console.WriteLine("-------");
+
+for (int i = 1; i <= N; i++)
 {
-    cube = Math.Pow(count, 3);
-    Console.WriteLine($"{count} | {cube}");
-    count++;
+    Console.WriteLine($"{i} | {Math.Pow(i, 3)}");
+    Console.WriteLine("-------");
 }
-Console.WriteLine("--------");
