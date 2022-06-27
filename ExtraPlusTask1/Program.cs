@@ -16,7 +16,7 @@ int[] arrayB = new int[2];
 int[] arrayC = new int[2];
 int[] zeroArray = new int[2] {0, 0};
 
-PutPoint(arrayA, quarter);
+PutPoint(arrayA, quarter); //Устанавливаем точки в выбранной четверти
 PutPoint(arrayB, quarter);
 PutPoint(arrayC, quarter);
 
@@ -24,116 +24,115 @@ Console.WriteLine($"Координаты точки A: [{arrayA[0]} ; {arrayA[1]
 Console.WriteLine($"Координаты точки B: [{arrayB[0]} ; {arrayB[1]}]");
 Console.WriteLine($"Координаты точки C: [{arrayC[0]} ; {arrayC[1]}]");
 
-// Измерение расстояний между точками и от центра координат
+// Измерение расстояний между точками
 double lengthAB = MeasureLength(arrayA, arrayB);
 double lengthBC = MeasureLength(arrayB, arrayC);
 double lengthAC = MeasureLength(arrayA, arrayC);
+// Измерение расстояний от центра координат
 double lengthZeroA = MeasureLength(arrayA, zeroArray);
 double lengthZeroB = MeasureLength(arrayB, zeroArray);
 double lengthZeroC = MeasureLength(arrayC, zeroArray);
 
-Console.WriteLine(lengthAB + " : " + lengthBC + " : " + lengthAC);
-Console.WriteLine(lengthZeroA + " : " + lengthZeroB + " : " + lengthZeroC);
+Console.WriteLine("Расстояние AB: " + lengthAB + "\t BC: " + lengthBC + "\t AC: " + lengthAC);
+Console.WriteLine("Расстояние ZA: " + lengthZeroA + "\t ZB: " + lengthZeroB + "\t ZC: " + lengthZeroC);
+Console.WriteLine("*******************************************");
+Console.WriteLine("Прокладываем оптимальный маршрут...");
 
 double minDistance = lengthZeroA;
-string flag1 = "A";
-string flag2 = "";
-string flag3 = "";
+string flag = "A";
 
 if (lengthZeroB < minDistance)
 {
     minDistance = lengthZeroB;
-    flag1 = "B";
+    flag = "B";
 }
 if (lengthZeroC < minDistance) 
 {
     minDistance = lengthZeroC;
-    flag1 = "C";
+    flag = "C";
 }
 
-Console.WriteLine($"1. Двигемся к точке {flag1} - {minDistance} метра/ов");
-
-if (flag1 == "A")
+Console.WriteLine($"1. Двигемся к точке {flag} - {minDistance} метра/ов");
+/*
+void FindBestWay(int firstDist, int secondDist, int thirdDist)
+{
+    if (firstDist < secondDist)
+    {
+        Console.WriteLine($"2. Двигемся к точке B - {firstDist} метра/ов");
+        Console.WriteLine($"3. Двигемся к точке C - {thirdDist} метра/ов");
+    }
+    else
+    {
+        Console.WriteLine($"2. Двигемся к точке C - {secondDist} метра/ов");
+        Console.WriteLine($"3. Двигемся к точке B - {thirdDist} метра/ов");
+    }
+}
+*/
+if (flag == "A")
 {
     if (lengthAB < lengthAC)
     {
-        minDistance = lengthAB;
-        flag2 = "B";
-        Console.WriteLine($"2. Двигемся к точке {flag2} - {minDistance} метра/ов");
-        flag3 = "C";
+        Console.WriteLine($"2. Двигемся к точке B - {lengthAB} метра/ов");
         Console.WriteLine($"3. Двигемся к точке C - {lengthBC} метра/ов");
     }
     else
     {
-        minDistance = lengthAC;
-        flag2 = "C";
-        Console.WriteLine($"2. Двигемся к точке {flag2} - {minDistance} метра/ов");
-        flag3 = "B";
+        Console.WriteLine($"2. Двигемся к точке C - {lengthAC} метра/ов");
         Console.WriteLine($"3. Двигемся к точке B - {lengthBC} метра/ов");
     }
 }
 
-if (flag1 == "B")
+if (flag == "B")
 {
     if (lengthAB < lengthBC)
     {
-        minDistance = lengthAB;
-        flag2 = "A";
-        Console.WriteLine($"2. Двигемся к точке {flag2} - {minDistance} метра/ов");
-        flag3 = "C";
+        Console.WriteLine($"2. Двигемся к точке A - {lengthAB} метра/ов");
         Console.WriteLine($"3. Двигемся к точке C - {lengthAC} метра/ов");
     }
     else
     {
-        minDistance = lengthBC;
-        flag2 = "C";
-        Console.WriteLine($"2. Двигемся к точке {flag2} - {minDistance} метра/ов");
-        flag3 = "A";
+        Console.WriteLine($"2. Двигемся к точке C - {lengthBC} метра/ов");
         Console.WriteLine($"3. Двигемся к точке A - {lengthAC} метра/ов");
     }
 }
 
-if (flag1 == "C")
+if (flag == "C")
 {
     if (lengthBC < lengthAC)
     {
-        minDistance = lengthBC;
-        flag2 = "B";
-        Console.WriteLine($"2. Двигемся к точке {flag2} - {minDistance} метра/ов");
-        flag3 = "A";
+        Console.WriteLine($"2. Двигемся к точке B - {lengthBC} метра/ов");
         Console.WriteLine($"3. Двигемся к точке A - {lengthAB} метра/ов");
     }
     else
     {
-        minDistance = lengthAC;
-        flag2 = "A";
-        Console.WriteLine($"2. Двигемся к точке {flag2} - {minDistance} метра/ов");
-        flag3 = "B";
+        Console.WriteLine($"2. Двигемся к точке A - {lengthAC} метра/ов");
         Console.WriteLine($"3. Двигемся к точке B - {lengthAB} метра/ов");
     }
 }
 
 void PutPoint(int[] currentArray, int quarter)
 {
-    if (quarter == 1) 
+    switch (quarter)
     {
-    currentArray[0] = rand.Next(0, 100); 
-    currentArray[1] = rand.Next(0, 100); 
-    }
-    else if (quarter == 2)
-    {
-    currentArray[0] = rand.Next(-100, 1); 
-    currentArray[1] = rand.Next(0, 100); 
-    }
-    else if (quarter == 3)
-    {
-    currentArray[0] = rand.Next(-100, 1); 
-    currentArray[1] = rand.Next(-100, 1); 
-    }
-    else if (quarter == 4)
-    {
-    currentArray[0] = rand.Next(0, 100); 
-    currentArray[1] = rand.Next(-100, 1);
+    case 1:
+        currentArray[0] = rand.Next(0, 100); 
+        currentArray[1] = rand.Next(0, 100);
+        break;
+    case 2: 
+        currentArray[0] = rand.Next(-100, 1); 
+        currentArray[1] = rand.Next(0, 100); 
+        break;
+    case 3:
+        currentArray[0] = rand.Next(-100, 1); 
+        currentArray[1] = rand.Next(-100, 1);
+        break;
+    case 4:
+        currentArray[0] = rand.Next(0, 100); 
+        currentArray[1] = rand.Next(-100, 1);
+        break;
+    default:
+        Console.WriteLine("Введена не верная четверть");
+        break;
     }
 }
 
