@@ -53,63 +53,12 @@ if (lengthZeroC < minDistance)
 }
 
 Console.WriteLine($"1. Двигемся к точке {flag} - {minDistance} метра/ов");
-/*
-void FindBestWay(int firstDist, int secondDist, int thirdDist)
-{
-    if (firstDist < secondDist)
-    {
-        Console.WriteLine($"2. Двигемся к точке B - {firstDist} метра/ов");
-        Console.WriteLine($"3. Двигемся к точке C - {thirdDist} метра/ов");
-    }
-    else
-    {
-        Console.WriteLine($"2. Двигемся к точке C - {secondDist} метра/ов");
-        Console.WriteLine($"3. Двигемся к точке B - {thirdDist} метра/ов");
-    }
-}
-*/
-if (flag == "A")
-{
-    if (lengthAB < lengthAC)
-    {
-        Console.WriteLine($"2. Двигемся к точке B - {lengthAB} метра/ов");
-        Console.WriteLine($"3. Двигемся к точке C - {lengthBC} метра/ов");
-    }
-    else
-    {
-        Console.WriteLine($"2. Двигемся к точке C - {lengthAC} метра/ов");
-        Console.WriteLine($"3. Двигемся к точке B - {lengthBC} метра/ов");
-    }
-}
 
-if (flag == "B")
-{
-    if (lengthAB < lengthBC)
-    {
-        Console.WriteLine($"2. Двигемся к точке A - {lengthAB} метра/ов");
-        Console.WriteLine($"3. Двигемся к точке C - {lengthAC} метра/ов");
-    }
-    else
-    {
-        Console.WriteLine($"2. Двигемся к точке C - {lengthBC} метра/ов");
-        Console.WriteLine($"3. Двигемся к точке A - {lengthAC} метра/ов");
-    }
-}
+if (flag == "A") FindBestWay(lengthAB, lengthAC, lengthBC);
+if (flag == "B") FindBestWay(lengthAB, lengthBC, lengthAC);
+if (flag == "C") FindBestWay(lengthBC, lengthAC, lengthAB);
 
-if (flag == "C")
-{
-    if (lengthBC < lengthAC)
-    {
-        Console.WriteLine($"2. Двигемся к точке B - {lengthBC} метра/ов");
-        Console.WriteLine($"3. Двигемся к точке A - {lengthAB} метра/ов");
-    }
-    else
-    {
-        Console.WriteLine($"2. Двигемся к точке A - {lengthAC} метра/ов");
-        Console.WriteLine($"3. Двигемся к точке B - {lengthAB} метра/ов");
-    }
-}
-
+// Метод задания точек в выбранной четверти
 void PutPoint(int[] currentArray, int quarter)
 {
     switch (quarter)
@@ -136,12 +85,28 @@ void PutPoint(int[] currentArray, int quarter)
     }
 }
 
+// Функция измерения расстояния
 double MeasureLength(int[] currentArray1, int[] currentArray2)
 {
     double length = 0;
     length = Math.Sqrt((Math.Pow((currentArray1[0] - currentArray2[0]), 2) + 
                         Math.Pow((currentArray1[1] - currentArray2[1]), 2)));
     return Math.Round(length, 2);
+}
+
+// Поиск оптмального пути из второго пункта
+void FindBestWay(double firstDist, double secondDist, double thirdDist)
+{
+    if (firstDist < secondDist)
+    {
+        Console.WriteLine($"2. Двигемся к точке B - {firstDist} метра/ов");
+        Console.WriteLine($"3. Двигемся к точке C - {thirdDist} метра/ов");
+    }
+    else
+    {
+        Console.WriteLine($"2. Двигемся к точке C - {secondDist} метра/ов");
+        Console.WriteLine($"3. Двигемся к точке B - {thirdDist} метра/ов");
+    }
 }
 
 Console.WriteLine("*******************************************");
