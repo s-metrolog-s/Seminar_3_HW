@@ -40,10 +40,10 @@ int vectorMult(int ax,int ay,int bx,int by) //векторное произве�
 
 string CrossingVectors (int[] array1, int[] array2, int[] array3, int[] array4) //проверка пересечения векторов
 {                                                       
-    int v1 = vectorMult(arrayD[0] - arrayC[0], arrayD[1] - arrayC[1], arrayA[0] - arrayC[0], arrayA[1] - arrayC[1]);
-    int v2 = vectorMult(arrayD[0] - arrayC[0], arrayD[1] - arrayC[1], arrayB[0] - arrayC[0], arrayB[1] - arrayC[1]);
-    int v3 = vectorMult(arrayB[0] - arrayA[0], arrayB[1] - arrayA[1], arrayC[0] - arrayA[0], arrayC[1] - arrayA[1]);
-    int v4 = vectorMult(arrayB[0] - arrayA[0], arrayB[1] - arrayA[1], arrayD[0] - arrayA[0], arrayD[1] - arrayA[1]);
+    int v1 = vectorMult(array4[0] - array3[0], array4[1] - array3[1], array1[0] - array3[0], array1[1] - array3[1]);
+    int v2 = vectorMult(array4[0] - array3[0], array4[1] - array3[1], array2[0] - array3[0], array2[1] - array3[1]);
+    int v3 = vectorMult(array2[0] - array1[0], array2[1] - array1[1], array3[0] - array1[0], array3[1] - array1[1]);
+    int v4 = vectorMult(array2[0] - array1[0], array2[1] - array1[1], array4[0] - array1[0], array4[1] - array1[1]);
     if ((v1 * v2) < 0 && (v3 * v4) < 0)
     return "пересекаются";
     else return "не пересекаются";
