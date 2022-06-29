@@ -89,7 +89,7 @@ void FindTemp(int [] currentArray, int startY, int endY, int startM, int endM)
 {
     int maxTemp = 0;
     int minTemp = 0;
-    for (int i = ((startY) + (startM - 1)) % 2011; i < ((endY) + (endM - 1)) % 2011; i++)
+    for (int i = ((startY) + (startM - 1)) % 2011; i < ((endY) + (endY % 2011 * 12) + (endM - 1)) % 2011; i++)
     {
         if (currentArray[i] > maxTemp) maxTemp = currentArray[i];
         if (currentArray[i] < minTemp) minTemp = currentArray[i];
