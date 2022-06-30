@@ -87,12 +87,58 @@ int InputMonth(string name)
 
 void FindTemp(int [] currentArray, int startY, int endY, int startM, int endM)
 {
-    int maxTemp = 0;
-    int minTemp = 0;
+    int maxWinter = 0;
+    int minWinter = 0;
+    int maxSpring = 0;
+    int minSpring = 0;
+    int maxSummer = 0;
+    int minSummer = 0;
+    int maxAutumn = 0;
+    int minAutumn = 0;
+    int j = 0;
+
     for (int i = ((startY) + (startM - 1)) % 2011; i < ((endY) + (endY % 2011 * 12) + (endM - 1)) % 2011; i++)
     {
-        if (currentArray[i] > maxTemp) maxTemp = currentArray[i];
-        if (currentArray[i] < minTemp) minTemp = currentArray[i];
+        if (i >= 12) j = (i + 1) % 12;
+        else j = i + 1;
+        if (j == 0 || j == 12 || j == 1 || j == 2)
+        {
+            maxWinter = currentArray[i];
+            minWinter = currentArray[i];
+            if (currentArray[i] > maxWinter) maxWinter = currentArray[i];
+            if (currentArray[i] < minWinter) minWinter = currentArray[i];
+        }
+        if (j == 3 || j == 4 || j == 5)
+        {
+            maxSpring = currentArray[i];
+            minSpring = currentArray[i];
+            if (currentArray[i] > maxSpring) maxSpring = currentArray[i];
+            if (currentArray[i] < minSpring) minSpring = currentArray[i];
+        }
+        if (j == 6 || j == 7 || j == 8)
+        {
+            maxSummer = currentArray[i];
+            minSummer = currentArray[i];
+            if (currentArray[i] > maxSummer) maxSummer = currentArray[i];
+            if (currentArray[i] < minSummer) minSummer = currentArray[i];
+        }
+        if (j == 9 || j == 10 || j == 11)
+        {
+            maxAutumn = currentArray[i];
+            minAutumn = currentArray[i];
+            if (currentArray[i] > maxAutumn) maxAutumn = currentArray[i];
+            if (currentArray[i] < minAutumn) minAutumn = currentArray[i];
+        }
     }
-    Console.WriteLine(maxTemp + " : " + minTemp);
+    Console.WriteLine($"Самые высокие температуры для:");
+    Console.WriteLine($"Зимы - {maxWinter}");
+    Console.WriteLine($"Весны - {maxSpring}");
+    Console.WriteLine($"Лета - {maxSummer}");
+    Console.WriteLine($"Осени - {maxAutumn}");
+
+    Console.WriteLine($"Самые низкие температуры для:");
+    Console.WriteLine($"Зимы - {minWinter}");
+    Console.WriteLine($"Весны - {minSpring}");
+    Console.WriteLine($"Лета - {minSummer}");
+    Console.WriteLine($"Осени - {minAutumn}");
 }
